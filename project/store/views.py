@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Product , ScaledImage , Promotion , Product_Page_Left , Product_Page_Down , Index_Page_UP , Wilaya , Commune , Client
+from .models import Category , Subcategory , Category_Acceuil
 import random
 
 
@@ -33,7 +34,8 @@ def index(request):
     context = {
         'objects': objects,
         'IT' : IT_Selected_List,
-        'IT_Promo' : Promo_List
+        'IT_Promo' : Promo_List,
+        "Acceuil" : Category_Acceuil.objects.all(),
     }
 
     return render(request,"store/index.html",context)
@@ -234,8 +236,90 @@ def aboutus(request):
 def contact(request):
 	return render(request,"store/contact.html")
 def shop(request):
-	return render(request,"store/shop.html")
+	cat = Category.objects.all()
+	allSorted = []
+	for c in cat:
+		sb = Subcategory.objects.filter(category=c)
+		allSorted.append([c,sb])
 
+
+	objects = Product.objects.all()
+
+	IT_Selected_List = [ p for p in objects]
+
+	#original_image
+	for i in range(len(IT_Selected_List)):
+		thumbnails = ScaledImage.objects.filter(original_image = IT_Selected_List[i])
+		IT_Selected_List[i] = [ IT_Selected_List[i] , thumbnails[0].scaled_image_247x296.url ,
+		thumbnails[1].scaled_image_247x296.url]
+	
+	context = {
+		"allSorted" : allSorted,
+		'IT' : IT_Selected_List,
+		"len" : len(objects),
+		"NameCat" : "Shop"
+	}
+	
+
+	return render(request,"store/shop.html",context)
+
+def shopCat(request,cat_name):
+
+	cat = Category.objects.all()
+	allSorted = []
+	for c in cat:
+		sb = Subcategory.objects.filter(category=c)
+		allSorted.append([c,sb])
+
+	cat_name = cat_name.replace("-"," ")
+	objects = Product.objects.filter(category=Category.objects.filter(name=cat_name)[0])
+
+	IT_Selected_List = [ p for p in objects]
+
+	#original_image
+	for i in range(len(IT_Selected_List)):
+		thumbnails = ScaledImage.objects.filter(original_image = IT_Selected_List[i])
+		IT_Selected_List[i] = [ IT_Selected_List[i] , thumbnails[0].scaled_image_247x296.url ,
+		thumbnails[1].scaled_image_247x296.url]
+	
+	context = {
+		"allSorted" : allSorted,
+		'IT' : IT_Selected_List,
+		"len" : len(objects),
+		"NameCat" : cat_name.replace("-"," ")
+	}
+	
+
+	return render(request,"store/shop.html",context)
+
+
+def shopCatSub(request,cat_name,sub_name):
+	cat = Category.objects.all()
+	allSorted = []
+	for c in cat:
+		sb = Subcategory.objects.filter(category=c)
+		allSorted.append([c,sb])
+
+
+	objects = Product.objects.filter(subcategory=Subcategory.objects.filter(name=sub_name.replace("-"," "))[0])
+
+	IT_Selected_List = [ p for p in objects]
+
+	#original_image
+	for i in range(len(IT_Selected_List)):
+		thumbnails = ScaledImage.objects.filter(original_image = IT_Selected_List[i])
+		IT_Selected_List[i] = [ IT_Selected_List[i] , thumbnails[0].scaled_image_247x296.url ,
+		thumbnails[1].scaled_image_247x296.url]
+	
+	context = {
+		"allSorted" : allSorted,
+		'IT' : IT_Selected_List,
+		"len" : len(objects),
+		"NameCat" : "{0} - {1}".format(cat_name.replace("-"," "),sub_name.replace("-"," "))
+	}
+	
+
+	return render(request,"store/shop.html",context)
 
 
 def get_client_ip(request):

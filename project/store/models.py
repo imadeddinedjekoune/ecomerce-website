@@ -14,6 +14,16 @@ class Subcategory(models.Model):
     def __str__(self):
         return self.name
 
+
+class Category_Acceuil (models.Model):
+    name = models.CharField(max_length=100)
+    image_0 = models.ImageField(upload_to='products/images/list/')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)

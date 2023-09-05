@@ -2115,7 +2115,7 @@
                           <img
                             width="720"
                             height="720"
-                            src="{% static 'image/bg6_scaled.jpg' %}"
+                            src="{{Acceuil.0.image_0.url }}"
                             class="attachment- size-"
                             alt=""
                             loading="lazy"
@@ -2143,7 +2143,7 @@
                           </div>
 
                           <div id="text-863881269" class="text">
-                            <h3 class="uppercase">Accessoires</h3>
+                            <h3 class="uppercase">{{Acceuil.0.name}}</h3>
 
                             <style>
                               #text-863881269 {
@@ -2152,13 +2152,16 @@
                             </style>
                           </div>
 
-                          <span
-                            target="_self"
-                            class="button white"
-                            style="border-radius: 99px"
-                          >
-                            <span>Acheter</span>
-                          </span>
+                          <a href="/store/shop/{{Acceuil.0.category.name}}">
+                              <span
+                              target="_self"
+                              class="button white"
+                              style="border-radius: 99px"
+                            >
+                              <span>Acheter</span>
+                            </span>
+                          </a>
+
                         </div>
                       </div>
                     </div>
@@ -2173,7 +2176,7 @@
                           <img
                             width="1280"
                             height="720"
-                            src="{% static 'image/bg9_scaled.jpg' %}"
+                            src="{{Acceuil.1.image_0.url }}"
                             class="attachment- size-"
                             alt=""
                             loading="lazy"
@@ -2201,7 +2204,7 @@
                           </div>
 
                           <div id="text-1129181415" class="text">
-                            <h3 class="uppercase">Decorations</h3>
+                            <h3 class="uppercase">{{Acceuil.1.name}}</h3>
 
                             <style>
                               #text-1129181415 {
@@ -2210,13 +2213,15 @@
                             </style>
                           </div>
 
-                          <span
-                            target="_self"
-                            class="button white"
-                            style="border-radius: 99px"
-                          >
-                            <span>Acheter</span>
-                          </span>
+                          <a href="/store/shop/{{Acceuil.1.category.name}}">
+                              <span
+                              target="_self"
+                              class="button white"
+                              style="border-radius: 99px"
+                            >
+                              <span>Acheter</span>
+                            </span>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -2231,7 +2236,7 @@
                           <img
                             width="1000"
                             height="750"
-                            src="{% static 'image/bg10_scaled.jpg' %}"
+                            src="{{Acceuil.2.image_0.url }}"
                             class="attachment- size-"
                             alt=""
                             loading="lazy"
@@ -2259,7 +2264,7 @@
                           </div>
 
                           <div id="text-2067369154" class="text">
-                            <h3 class="uppercase">Vetements</h3>
+                            <h3 class="uppercase">{{Acceuil.2.name}}</h3>
 
                             <style>
                               #text-2067369154 {
@@ -2268,13 +2273,15 @@
                             </style>
                           </div>
 
-                          <span
-                            target="_self"
-                            class="button white"
-                            style="border-radius: 99px"
-                          >
-                            <span>Acheter</span>
-                          </span>
+                          <a href="/store/shop/{{Acceuil.2.category.name}}">
+                              <span
+                              target="_self"
+                              class="button white"
+                              style="border-radius: 99px"
+                            >
+                              <span>Acheter</span>
+                            </span>
+                          </a>
                         </div>
                       </div>
                     </div>
